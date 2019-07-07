@@ -1,36 +1,40 @@
-module.exports = {
-  getAllEmployees() {
-    return fetch('/api/employees', {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' }
-    }).then(response => response.json());
-  },
-  addEmployee(employee) {
-    return fetch('/api/employee', {
+export async function getAllEmployees() {
+  const response = await fetch('/api/employees', {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  });
+  return await response.json();
+}
+export async function addEmployee(employee) {
+  try {
+    const response = await fetch('/api/employee', {
       method: 'POST',
       body: JSON.stringify({
         name: employee.name,
-        schedule: employee.schedule
+        schedule: employee.schedule,
       }),
-      headers: { 'Content-Type': 'application/json' }
-    })
-      .then(response => response.json())
-      .catch(err => console.log(err));
-  },
-  editEmployee(employee) {
-    return fetch('/api/employee/' + employee._id, {
-      method: 'PUT',
-      body: JSON.stringify({
-        name: employee.name,
-        schedule: employee.schedule
-      }),
-      headers: { 'Content-Type': 'application/json' }
-    }).then(response => response.json());
-  },
-  deleteEmployee(id) {
-    return fetch('/api/employee/' + id, {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' }
-    }).then(response => response.json());
+      headers: { 'Content-Type': 'application/json' },
+    });
+    return await response.json();
+  } catch (err) {
+    return console.log(err);
   }
-};
+}
+export async function editEmployee(employee) {
+  const response = await fetch('/api/employee/' + employee._id, {
+    method: 'PUT',
+    body: JSON.stringify({
+      name: employee.name,
+      schedule: employee.schedule,
+    }),
+    headers: { 'Content-Type': 'application/json' },
+  });
+  return await response.json();
+}
+export async function deleteEmployee(id) {
+  const response = await fetch('/api/employee/' + id, {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+  });
+  return await response.json();
+}

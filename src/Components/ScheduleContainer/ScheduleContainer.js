@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { singleEmployee } from '../../initial_state/';
-import employeeRepository from '../../repositories/employeeRepository';
+import * as employeeRepository from '../../repositories/employeeRepository';
 import AddEmployeeDropdowns from '../AddEmployeeDropdowns/AddEmployeeDropdowns';
 import ScheduleTable from '../ScheduleTable/ScheduleTable';
 import * as styles from './ScheduleContainer.module.css';
